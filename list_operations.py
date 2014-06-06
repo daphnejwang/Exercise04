@@ -21,9 +21,8 @@ test_list_operations.py for concrete examples of the expected function behavior.
 def head(input_list):
     return input_list[0]
   
-
 def tail(input_list):   
-    return input_list[1::]
+    return input_list[1:]
 
 def last(input_list):
     return input_list[-1]
@@ -115,17 +114,16 @@ def custom_len(input_list):
 # For the next four functions, get clever using slice operations described in the first half
 def custom_append(input_list, value):
     """custom_append(input_list, value) imitates input_list.append(value)"""
-    i=0
-    for a in input_list:
-      i+=1
-    input_list[i:]=[value]
+
+    input_list[custom_len(input_list):]=[value]
 
 def custom_extend(input_list, values):
     """custom_extend(input_list, values) imitates input_list.extend(values)"""
-    i=0
-    for a in input_list:
-      i+=1
-    input_list[i:]= values
+    # i=0
+    # for a in input_list:
+    #   i+=1
+    # input_list[i:]= values
+    custom_append(input_list,values)
 
 def custom_insert(input_list, index, value):
     """custom_insert(input_list, index, value) imitates
@@ -174,16 +172,20 @@ def custom_reverse(input_list):
 
 def custom_contains(input_list, value):
     """custom_contains(input_list, value) imitates (value in input_list)"""
-    #i=0
     for item in input_list:
-      if item==value:
-        return True
-        break
-      #i+=1
+        if item==value:
+            return True
+            break
     return False
 
 def custom_equality(some_list, another_list):
     """custom_equality(some_list, another_list) imitates
     (some_list == another_list)
     """
-    pass
+    if custom_len(some_list)!=custom_len(another_list):
+        return False
+    for i in range(custom_len(some_list)): 
+        if some_list[i]!=another_list[i]:
+            return False
+            break
+    return True
